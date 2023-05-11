@@ -1,11 +1,11 @@
 /**
  * Instructions
- * 
+ *
  * Implement an endpoint that lists all payment methods and accepts a filter by "type"
  * Implement an endpoint that shows the details of a single payment method
  * Implement an endpoint that deletes a single payment method
  * Implement an endpoint that exports all payments methods in CSV format
- * 
+ *
  * Make sure you handle errors (not found, server error, etc.) with a proper HTTP status
  * Use async/await when possible
  * All endpoints must send a valid JSON response
@@ -22,13 +22,18 @@
  *
  */
 
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 
 const server = express();
 
-server.get('/payment_methods', (req, res) => {
-  res.status(404).send({
-    status: 200
+const methodPayment = require("./helpers/methodPayment");
+server.use(cors());
+
+server.get("/payment_methods", (req, res) => {
+  res.status(200).send({
+    status: 200,
+    data: methodPayment,
   });
 });
 
